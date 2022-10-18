@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app/restaurant_detail/view/widgets/info_card.dart';
@@ -7,57 +9,48 @@ import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/app_text.dart';
 import 'package:provider/provider.dart';
 
-class FssaiScreen extends StatelessWidget {
-  const FssaiScreen({Key? key}) : super(key: key);
+class LocationDetails extends StatelessWidget {
+  const LocationDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController dateCtl = TextEditingController();
+    log("message");
     return Consumer<FormProvider>(builder: (context, value, _) {
-      return value.isFssai
+      return value.isLocation
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "FSSAI Details",
+                    "Location Details",
                     style: AppTextStyles.h2,
                   ),
                 ),
                 InfoCard(
-                  text: AppStyle.fssaiText,
+                  text: AppStyle.locationText,
                 ),
                 AppStyle.sizedBox10,
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("FSSAI Expiration Date"),
-                ),
-                TextformsWidget(
-                  suffix: const Icon(Icons.date_range_outlined),
-                  function: () async {
-                    DateTime date = DateTime(1900);
-                    FocusScope.of(context).requestFocus(FocusNode());
-
-                    date = (await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100)))!;
-
-                    dateCtl.text = date.toIso8601String();
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Enter FSSAI Register Number"),
+                  child: Text("Owner Name"),
                 ),
                 const TextformsWidget(),
-                value.isLocation == false
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Email"),
+                ),
+                const TextformsWidget(),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Zip Code"),
+                ),
+                const TextformsWidget(),
+                value.isPan == false
                     ? ButtonWidget(
-                        index: 2,
+                        index: 3,
                         fn: () {
-                          context.read<FormProvider>().onTabisLocation(2);
+                          context.read<FormProvider>().onTabisPan(3);
                         },
                       )
                     : Divider(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/fssai/view/fssai_screen.dart';
+import 'package:partner_app/app/location_details/view/location.dart';
+import 'package:partner_app/app/pan_details/view/pan_details.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
 import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app/restaurant_detail/view/widgets/info_card.dart';
@@ -94,7 +96,18 @@ class RestaurantDetailScreen extends StatelessWidget {
                   child: Text("Whatsapp Owner Number"),
                 ),
                 const TextformsWidget(),
-                const FssaiSection(),
+                context.watch<FormProvider>().isFssai
+                    ? Divider(
+                        color: AppStyle.buttonColor,
+                      )
+                    : ButtonWidget(
+                        fn: () {
+                          context.read<FormProvider>().onTabIndexFirstChange(1);
+                        },
+                      ),
+                const FssaiScreen(),
+                const LocationDetails(),
+                const PanDetail()
               ],
             ),
           ),
@@ -104,24 +117,50 @@ class RestaurantDetailScreen extends StatelessWidget {
   }
 }
 
-class FssaiSection extends StatelessWidget {
-  const FssaiSection({
+// class FssaiSection extends StatelessWidget {
+//   const FssaiSection({
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<FormProvider>(builder: (context, value, _) {
+//       return value.isFssai
+//           ? Column(
+//               children: [
+//                 Divider(
+//                   color: AppStyle.buttonColor,
+//                 ),
+//                 const FssaiScreen(),
+//                 // const LocationDetails(),
+//               ],
+//             )
+
+//     });
+//   }
+// }
+
+class LocationSection extends StatelessWidget {
+  const LocationSection({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<FormProvider>(builder: (context, value, _) {
-      return value.isFssai
+      return value.isLocation
           ? Column(
               children: [
                 Divider(
                   color: AppStyle.buttonColor,
                 ),
-                const FssaiScreen(),
+                const LocationDetails(),
               ],
             )
-          : const ButtonWidget(index: 1);
+          : ButtonWidget(
+              index: 3,
+              fn: context.read<FormProvider>().onTabisPan(3),
+            );
     });
   }
 }

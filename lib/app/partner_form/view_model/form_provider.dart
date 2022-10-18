@@ -7,13 +7,44 @@ import 'package:partner_app/app/restaurant_detail/view/restaurant_screen.dart';
 class FormProvider with ChangeNotifier {
   int pageIndex = 0;
   bool isFssai = false;
+  bool isPan = false;
+
+  bool isLocation = false;
 
   final List pages = [const RestaurantDetailScreen(), const FssaiScreen()];
-  onTabIndexChange(int number) {
+  onTabIndexFirstChange(int number) {
     pageIndex = number;
     isFssai = true;
+
     log(isFssai.toString());
 
     notifyListeners();
+  }
+
+  // bool onTabisFssail() {
+  //   log(isFssai.toString());
+
+  //   notifyListeners();
+  //   return isFssai;
+  // }
+
+  onTabisLocation(int number) {
+    pageIndex = number;
+    isLocation = true;
+
+    log(isLocation.toString());
+
+    notifyListeners();
+    return isLocation;
+  }
+
+  onTabisPan(int number) {
+    pageIndex = number;
+    isPan = true;
+
+    log(isPan.toString());
+
+    notifyListeners();
+    return isPan;
   }
 }

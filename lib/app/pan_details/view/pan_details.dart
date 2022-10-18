@@ -7,21 +7,20 @@ import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/app_text.dart';
 import 'package:provider/provider.dart';
 
-class FssaiScreen extends StatelessWidget {
-  const FssaiScreen({Key? key}) : super(key: key);
+class PanDetail extends StatelessWidget {
+  const PanDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController dateCtl = TextEditingController();
     return Consumer<FormProvider>(builder: (context, value, _) {
-      return value.isFssai
+      return value.isPan
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "FSSAI Details",
+                    "Pan Details",
                     style: AppTextStyles.h2,
                   ),
                 ),
@@ -31,38 +30,28 @@ class FssaiScreen extends StatelessWidget {
                 AppStyle.sizedBox10,
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("FSSAI Expiration Date"),
-                ),
-                TextformsWidget(
-                  suffix: const Icon(Icons.date_range_outlined),
-                  function: () async {
-                    DateTime date = DateTime(1900);
-                    FocusScope.of(context).requestFocus(FocusNode());
-
-                    date = (await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100)))!;
-
-                    dateCtl.text = date.toIso8601String();
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Enter FSSAI Register Number"),
+                  child: Text("Pan Number"),
                 ),
                 const TextformsWidget(),
-                value.isLocation == false
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Full Name"),
+                ),
+                const TextformsWidget(),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Mobile Number"),
+                ),
+                const TextformsWidget(),
+                value.isLocation
                     ? ButtonWidget(
                         index: 2,
-                        fn: () {
-                          context.read<FormProvider>().onTabisLocation(2);
-                        },
+                        fn: () =>
+                            context.read<FormProvider>().onTabisLocation(2),
                       )
                     : Divider(
                         color: AppStyle.buttonColor,
-                      )
+                      ),
               ],
             )
           : const SizedBox();
