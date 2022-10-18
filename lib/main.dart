@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view/form_screen.dart';
+import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app/splash/view_model/splash_provider.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (create) => SplashProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (create) => FormProvider(),
         )
       ],
       child: MaterialApp(
