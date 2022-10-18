@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/bank_details/bank_details.dart';
 import 'package:partner_app/app/fssai/view/fssai_screen.dart';
@@ -36,86 +38,116 @@ class RestaurantDetailScreen extends StatelessWidget {
             physics: const ScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Restaurant Details",
-                    style: AppTextStyles.h2,
-                  ),
-                ),
-                InfoCard(
-                  text: AppStyle.registerText,
-                ),
-                AppStyle.sizedBox10,
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("City"),
-                ),
-                DropDownWidget(
-                  hint: "Cities",
-                  list: RestaurantProvider().cities,
-                ),
-                Visibility(
-                  visible: context.watch<RestaurantProvider>().newValue != null,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Text("Area"),
-                      ),
-                      DropDownWidget(
-                        hint: "Area",
-                        list: RestaurantProvider().cities,
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Restaurant Name"),
-                ),
-                const TextformsWidget(),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Enter Owner Number"),
-                ),
-                const TextformsWidget(),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Preffered Languages"),
-                ),
-                const CheckBoxDropDown(),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Owner Name"),
-                ),
-                const TextformsWidget(),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Whatsapp Owner Number"),
-                ),
-                const TextformsWidget(),
-                context.watch<FormProvider>().isFssai
-                    ? Divider(
-                        color: AppStyle.buttonColor,
-                      )
-                    : ButtonWidget(
-                        fn: () {
-                          context.read<FormProvider>().onTabIndexFirstChange(1);
-                        },
-                      ),
-                const FssaiScreen(),
-                const LocationDetails(),
-                const PanDetail(),
-                const BankDetails()
+              children: const [
+                FirstSection(),
+                FssaiScreen(),
+                LocationDetails(),
+                PanDetail(),
+                BankDetails()
               ],
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+class FirstSection extends StatelessWidget {
+  const FirstSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    log("first");
+    return Consumer<RestaurantProvider>(builder: (context, value, _) {
+      return Form(
+        key: value.formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Restaurant Details",
+                style: AppTextStyles.h2,
+              ),
+            ),
+            InfoCard(
+              text: AppStyle.registerText,
+            ),
+            AppStyle.sizedBox10,
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text("City"),
+            ),
+            DropDownWidget(
+              hint: "Cities",
+              list: RestaurantProvider().cities,
+            ),
+            Visibility(
+              visible: context.watch<RestaurantProvider>().newValue != null,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Text("Area"),
+                  ),
+                  DropDownWidget(
+                    hint: "Area",
+                    list: RestaurantProvider().cities,
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text("Restaurant Name"),
+            ),
+            TextformsWidget(
+              controller: RestaurantProvider().resName,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text("Enter Owner Number"),
+            ),
+            TextformsWidget(
+              controller: RestaurantProvider().phoneNumber,
+              type: TextInputType.number,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text("Preffered Languages"),
+            ),
+            const CheckBoxDropDown(),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text("Owner Name"),
+            ),
+            TextformsWidget(controller: RestaurantProvider().ownerName),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text("Whatsapp Owner Number"),
+            ),
+            TextformsWidget(
+              controller: RestaurantProvider().whatsappnumber,
+              type: TextInputType.number,
+            ),
+            context.watch<FormProvider>().isFssai
+                ? Divider(
+                    color: AppStyle.buttonColor,
+                  )
+                : ButtonWidget(
+                    fn: () {
+                      value.buttonFn(context);
+                    },
+                  ),
+          ],
+        ),
+      );
+    });
   }
 }
 

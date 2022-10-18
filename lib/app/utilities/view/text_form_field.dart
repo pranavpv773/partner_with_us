@@ -3,24 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:partner_app/app_style/app_style.dart';
 
 class TextformsWidget extends StatelessWidget {
-  const TextformsWidget({Key? key, this.type, this.suffix, this.function})
+  const TextformsWidget(
+      {Key? key, this.type, this.suffix, this.function, this.controller})
       : super(key: key);
   final TextInputType? type;
   final Widget? suffix;
   final void Function()? function;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return " Please fill this field";
+          }
+        },
         onTap: function ?? () {},
         keyboardType: type ?? TextInputType.name,
-        //controller: context.read<LoginProvider>().email,
+        controller: controller,
         style: TextStyle(
           color: AppStyle.kGrey,
           fontSize: 18,
         ),
         decoration: InputDecoration(
+          // helperText: controller!.text ?? "",
           contentPadding: const EdgeInsets.all(0),
           fillColor: AppStyle.kWhite,
           filled: true,

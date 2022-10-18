@@ -9,8 +9,7 @@ class CheckBoxDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RestaurantProvider>(builder: (context, value, _) {
-      return Padding(
+    return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
@@ -20,75 +19,76 @@ class CheckBoxDropDown extends StatelessWidget {
                 width: 2,
               )),
           width: AppStyle.size.width,
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton2(
-              isExpanded: true,
-              hint: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Select Items',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).hintColor,
-                  ),
-                ),
-              ),
-              items: value.items.map((item) {
-                return DropdownMenuItem<String>(
-                  value: item,
-                  enabled: false,
-                  child: InkWell(
-                    onTap: () {
-                      value.selectCheckValue(item);
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        children: [
-                          value.iconCheck(item),
-                          const SizedBox(width: 16),
-                          Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
+          child: Consumer<RestaurantProvider>(builder: (context, value, _) {
+            return DropdownButtonHideUnderline(
+              child: DropdownButton2(
+                isExpanded: true,
+                hint: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Select Items',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).hintColor,
                     ),
                   ),
-                );
-              }).toList(),
-              value:
-                  value.selectedItems.isEmpty ? null : value.selectedItems.last,
-              onChanged: (value) {},
-              buttonHeight: 40,
-              buttonWidth: 140,
-              itemHeight: 40,
-              itemPadding: EdgeInsets.zero,
-              selectedItemBuilder: (context) {
-                return value.items.map(
-                  (item) {
-                    return Container(
-                      alignment: AlignmentDirectional.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        value.selectedItems.join(', '),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          overflow: TextOverflow.ellipsis,
+                ),
+                items: value.items.map((item) {
+                  return DropdownMenuItem<String>(
+                    value: item,
+                    enabled: false,
+                    child: InkWell(
+                      onTap: () {
+                        value.selectCheckValue(item);
+                      },
+                      child: Container(
+                        height: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          children: [
+                            value.iconCheck(item),
+                            const SizedBox(width: 16),
+                            Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
                         ),
-                        maxLines: 1,
                       ),
-                    );
-                  },
-                ).toList();
-              },
-            ),
-          ),
-        ),
-      );
-    });
+                    ),
+                  );
+                }).toList(),
+                value: value.selectedItems.isEmpty
+                    ? null
+                    : value.selectedItems.last,
+                onChanged: (value) {},
+                buttonHeight: 40,
+                buttonWidth: 140,
+                itemHeight: 40,
+                itemPadding: EdgeInsets.zero,
+                selectedItemBuilder: (context) {
+                  return value.items.map(
+                    (item) {
+                      return Container(
+                        alignment: AlignmentDirectional.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          value.selectedItems.join(', '),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 1,
+                        ),
+                      );
+                    },
+                  ).toList();
+                },
+              ),
+            );
+          }),
+        ));
   }
 }

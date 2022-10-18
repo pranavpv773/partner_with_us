@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partner_app/app/fssai/view_model/fssai_provider.dart';
 import 'package:partner_app/app/partner_form/view/form_screen.dart';
 import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app/restaurant_detail/view_model/restaurant_provider.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (create) => RestaurantProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (create) => FssaiProvider(),
         )
       ],
       child: MaterialApp(
