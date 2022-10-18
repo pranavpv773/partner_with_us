@@ -3,6 +3,7 @@ import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app/utilities/view/list.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/app_text.dart';
+import 'package:provider/provider.dart';
 
 class SliverAppBarWidget extends StatelessWidget {
   const SliverAppBarWidget({Key? key}) : super(key: key);
@@ -40,9 +41,10 @@ class SliverAppBarWidget extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 10,
-                            backgroundColor: FormProvider().pageIndex == index
-                                ? Colors.amber
-                                : AppStyle.kGrey,
+                            backgroundColor:
+                                context.watch<FormProvider>().pageIndex == index
+                                    ? Colors.amber
+                                    : AppStyle.kGrey,
                             child: FittedBox(
                               child: Text(
                                 " ${index + 1}",

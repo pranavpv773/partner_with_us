@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view/widgets/sliver_appbar_widget.dart';
 import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
+import 'package:partner_app/app/restaurant_detail/view/restaurant_screen.dart';
 import 'package:provider/provider.dart';
 
 class FormScreen extends StatelessWidget {
@@ -16,9 +17,7 @@ class FormScreen extends StatelessWidget {
               const SliverAppBarWidget(),
             ];
           },
-          body: Consumer<FormProvider>(builder: (context, value, _) {
-            return value.pages[value.pageIndex];
-          }),
+          body: const RestaurantDetailScreen(),
         ),
       ),
     );

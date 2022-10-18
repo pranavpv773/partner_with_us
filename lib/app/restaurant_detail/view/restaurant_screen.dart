@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:partner_app/app/fssai/view/fssai_screen.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
+import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app/restaurant_detail/view/widgets/info_card.dart';
 import 'package:partner_app/app/restaurant_detail/view_model/restaurant_provider.dart';
 import 'package:partner_app/app/utilities/view/button.dart';
@@ -18,17 +20,17 @@ class RestaurantDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const ScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Material(
-          elevation: 10,
-          shadowColor: AppStyle.kGrey,
-          child: ContainerWidget(
-            color: Colors.white,
-            width: AppStyle.size.width,
-            height: AppStyle.size.height,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Material(
+        elevation: 10,
+        shadowColor: AppStyle.kGrey,
+        child: ContainerWidget(
+          color: AppStyle.kWhite,
+          width: AppStyle.size.width,
+          height: AppStyle.size.height,
+          child: SingleChildScrollView(
+            physics: const ScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,7 +41,10 @@ class RestaurantDetailScreen extends StatelessWidget {
                     style: AppTextStyles.h2,
                   ),
                 ),
-                const InfoCard(),
+                InfoCard(
+                  text: AppStyle.registerText,
+                ),
+                AppStyle.sizedBox10,
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
                   child: Text("City"),
@@ -71,7 +76,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                 const TextformsWidget(),
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Enter Owner NUmber"),
+                  child: Text("Enter Owner Number"),
                 ),
                 const TextformsWidget(),
                 const Padding(
@@ -79,12 +84,44 @@ class RestaurantDetailScreen extends StatelessWidget {
                   child: Text("Preffered Languages"),
                 ),
                 const CheckBoxDropDown(),
-                const ButtonWidget(index: 1)
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Owner Name"),
+                ),
+                const TextformsWidget(),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Whatsapp Owner Number"),
+                ),
+                const TextformsWidget(),
+                const FssaiSection(),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+class FssaiSection extends StatelessWidget {
+  const FssaiSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<FormProvider>(builder: (context, value, _) {
+      return value.isFssai
+          ? Column(
+              children: [
+                Divider(
+                  color: AppStyle.buttonColor,
+                ),
+                const FssaiScreen(),
+              ],
+            )
+          : const ButtonWidget(index: 1);
+    });
   }
 }

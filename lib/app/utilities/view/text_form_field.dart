@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:partner_app/app_style/app_style.dart';
 
 class TextformsWidget extends StatelessWidget {
-  const TextformsWidget({Key? key, this.type, this.suffix}) : super(key: key);
+  const TextformsWidget({Key? key, this.type, this.suffix, this.function})
+      : super(key: key);
   final TextInputType? type;
   final Widget? suffix;
+  final void Function()? function;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        onTap: () {},
+        onTap: function ?? () {},
         keyboardType: type ?? TextInputType.name,
         //controller: context.read<LoginProvider>().email,
         style: TextStyle(

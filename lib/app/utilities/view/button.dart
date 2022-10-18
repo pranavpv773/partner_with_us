@@ -17,13 +17,18 @@ class ButtonWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
-          color: AppStyle.buttonColor,
           margin: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(2),
+            color: AppStyle.buttonColor,
+          ),
           height: 30.0,
           child: TextButton(
-            child: Text(
-              "Process",
-              style: TextStyle(fontSize: 15, color: AppStyle.kWhite),
+            child: Center(
+              child: Text(
+                "Process",
+                style: TextStyle(fontSize: 15, color: AppStyle.kWhite),
+              ),
             ),
             onPressed: () {
               context.read<FormProvider>().onTabIndexChange(index);
