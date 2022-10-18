@@ -15,7 +15,7 @@ class InfoCard extends StatelessWidget {
         radius: const BorderRadius.all(Radius.circular(8)),
         color: AppStyle.primary1,
         width: AppStyle.size.width / 1,
-        height: AppStyle.size.height / 11,
+        height: AppStyle.size.height / 13,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -24,7 +24,7 @@ class InfoCard extends StatelessWidget {
               wordSpacing: 2,
               letterSpacing: 1,
               fontWeight: FontWeight.w400,
-              fontSize: 16,
+              fontSize: 12,
               color: AppStyle.kWhite,
             ),
           ),

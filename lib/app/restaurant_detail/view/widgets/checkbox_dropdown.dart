@@ -35,37 +35,26 @@ class CheckBoxDropDown extends StatelessWidget {
               return DropdownMenuItem<String>(
                 value: item,
                 enabled: false,
-                child: StatefulBuilder(
-                  builder: (context, menuSetState) {
-                    final isSelected = value.selectedItems.contains(item);
-                    return InkWell(
-                      onTap: () {
-                        isSelected
-                            ? value.selectedItems.remove(item)
-                            : value.selectedItems.add(item);
-
-                        menuSetState(() {});
-                      },
-                      child: Container(
-                        height: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            isSelected
-                                ? const Icon(Icons.check_box_outlined)
-                                : const Icon(Icons.check_box_outline_blank),
-                            const SizedBox(width: 16),
-                            Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                child: InkWell(
+                  onTap: () {
+                    value.selectCheckValue(item);
                   },
+                  child: Container(
+                    height: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        value.iconCheck(item),
+                        const SizedBox(width: 16),
+                        Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               );
             }).toList(),

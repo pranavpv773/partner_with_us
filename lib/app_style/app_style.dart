@@ -10,6 +10,7 @@ class AppStyle {
 
   /*---Colors------*/
   static Color primary = const Color(0xff34cc89);
+  static Color buttonColor = Colors.amber;
   static Color primary1 = const Color.fromARGB(224, 78, 88, 151);
   static Color kWhite = Colors.white;
   static Color kBlack = Colors.black;
