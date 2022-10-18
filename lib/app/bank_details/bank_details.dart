@@ -7,20 +7,21 @@ import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/app_text.dart';
 import 'package:provider/provider.dart';
 
-class PanDetail extends StatelessWidget {
-  const PanDetail({Key? key}) : super(key: key);
+class BankDetails extends StatelessWidget {
+  const BankDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController dateCtl = TextEditingController();
     return Consumer<FormProvider>(builder: (context, value, _) {
-      return value.isPan
+      return value.isBank
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Pan Details",
+                    "Bank Details",
                     style: AppTextStyles.h2,
                   ),
                 ),
@@ -30,44 +31,34 @@ class PanDetail extends StatelessWidget {
                 AppStyle.sizedBox10,
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Pan Number"),
+                  child: Text("Bank Name"),
                 ),
                 const TextformsWidget(),
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Full Name"),
+                  child: Text("Branch Name"),
                 ),
                 const TextformsWidget(),
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Dob"),
+                  child: Text("Account Number"),
                 ),
-                TextformsWidget(
-                  suffix: const Icon(Icons.date_range_outlined),
-                  function: () async {
-                    DateTime date = DateTime(1900);
-                    FocusScope.of(context).requestFocus(FocusNode());
-
-                    date = (await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100)))!;
-                  },
-                ),
+                const TextformsWidget(),
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Mobile Number"),
+                  child: Text("IFSC Code"),
                 ),
                 const TextformsWidget(),
                 value.isBank
-                    ? Divider(
+                    ? ButtonWidget(
+                        index: 4,
+                        fn: () {
+                          context.read<FormProvider>().onTabisLocation(4);
+                        },
+                      )
+                    : Divider(
                         color: AppStyle.buttonColor,
                       )
-                    : ButtonWidget(
-                        index: 4,
-                        fn: () => context.read<FormProvider>().onTabisBank(4),
-                      ),
               ],
             )
           : const SizedBox();

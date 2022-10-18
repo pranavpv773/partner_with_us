@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
 import 'package:partner_app/app_style/app_style.dart';
+import 'package:partner_app/app_style/app_text.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({
@@ -16,18 +17,12 @@ class InfoCard extends StatelessWidget {
         radius: const BorderRadius.all(Radius.circular(8)),
         color: AppStyle.primary1,
         width: AppStyle.size.width / 1,
-        height: AppStyle.size.height / 13,
+        height: AppStyle.size.height / 12,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             text,
-            style: TextStyle(
-              wordSpacing: 2,
-              letterSpacing: 1,
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-              color: AppStyle.kWhite,
-            ),
+            style: AppTextStyles.h4,
           ),
         ),
       ),
