@@ -31,38 +31,54 @@ class SliverAppBarWidget extends StatelessWidget {
                 children: List.generate(ListChart.formList.length, (index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 150,
-                      height: 100,
-                      color: AppStyle.kWhite,
-                      child: Column(
+                    child: Consumer<FormProvider>(builder: (context, value, _) {
+                      return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CircleAvatar(
                             radius: 10,
-                            backgroundColor:
-                                context.watch<FormProvider>().pageIndex == index
-                                    ? Colors.amber
-                                    : AppStyle.kGrey,
+                            backgroundColor: value.pageIndex == index
+                                ? Colors.amber
+                                : index > value.pageIndex
+                                    ? AppStyle.kGrey
+                                    : AppStyle.primary,
                             child: FittedBox(
                               child: Text(
                                 " ${index + 1}",
                                 style: AppTextStyles.h5.copyWith(
-                                  color: FormProvider().pageIndex != index
+                                  color: value.pageIndex != index
                                       ? AppStyle.kBlack
                                       : AppStyle.kWhite,
                                 ),
                               ),
                             ),
                           ),
-                          Text(
-                            ListChart.formList[index].toString(),
-                            style: AppTextStyles.h3,
+                          Row(
+                            children: [
+                              Text(
+                                ListChart.formList[index].toString(),
+                                style: AppTextStyles.h3.copyWith(
+                                  color: value.pageIndex == index
+                                      ? AppStyle.kBlack
+                                      : index > value.pageIndex
+                                          ? AppStyle.kBlack
+                                          : AppStyle.primary,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: value.pageIndex == index
+                                    ? AppStyle.kBlack
+                                    : index > value.pageIndex
+                                        ? AppStyle.kBlack
+                                        : AppStyle.primary,
+                              )
+                            ],
                           ),
                         ],
-                      ),
-                    ),
+                      );
+                    }),
                   );
                 }),
               ),

@@ -2,11 +2,12 @@ class ListChart {
   static final formList = [
     "Restaurant Details",
     "FSSAI Details",
-    "Commission & Onboarding",
+    // "Commission & Onboarding",
     "Owner/Location Details",
     "GST/PAN Details",
     "Bank Details",
-    "E-Sign",
-    "Onboarding Form",
+    // "E-Sign",
+    //
+    // "Onboarding Form",
   ];
 }
