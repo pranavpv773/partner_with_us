@@ -10,7 +10,7 @@ class SliverAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      toolbarHeight: 100,
+      toolbarHeight: 80,
       backgroundColor: AppStyle.kBlack,
       expandedHeight: AppStyle.size.height / 2.0,
       floating: false,
@@ -19,48 +19,51 @@ class SliverAppBarWidget extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: FittedBox(
-          child: Container(
-            color: AppStyle.kWhite,
-            width: AppStyle.size.width,
-            height: 60,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: List.generate(ListChart.formList.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 150,
-                    height: 100,
-                    color: AppStyle.kWhite,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CircleAvatar(
-                          radius: 10,
-                          backgroundColor: FormProvider().pageIndex == index
-                              ? Colors.amber
-                              : AppStyle.kGrey,
-                          child: FittedBox(
-                            child: Text(
-                              " ${index + 1}",
-                              style: AppTextStyles.h5.copyWith(
-                                color: FormProvider().pageIndex != index
-                                    ? AppStyle.kBlack
-                                    : AppStyle.kWhite,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              color: AppStyle.kWhite,
+              width: AppStyle.size.width,
+              height: 60,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: List.generate(ListChart.formList.length, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 150,
+                      height: 100,
+                      color: AppStyle.kWhite,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                            radius: 10,
+                            backgroundColor: FormProvider().pageIndex == index
+                                ? Colors.amber
+                                : AppStyle.kGrey,
+                            child: FittedBox(
+                              child: Text(
+                                " ${index + 1}",
+                                style: AppTextStyles.h5.copyWith(
+                                  color: FormProvider().pageIndex != index
+                                      ? AppStyle.kBlack
+                                      : AppStyle.kWhite,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Text(
-                          ListChart.formList[index].toString(),
-                          style: AppTextStyles.h3,
-                        ),
-                      ],
+                          Text(
+                            ListChart.formList[index].toString(),
+                            style: AppTextStyles.h3,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ),
           ),
         ),

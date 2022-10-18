@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 class RestaurantProvider with ChangeNotifier {
   String? newValue;
+  String? newCity;
   String? newArea;
   final TextEditingController textEditingController = TextEditingController();
   final List cities = [

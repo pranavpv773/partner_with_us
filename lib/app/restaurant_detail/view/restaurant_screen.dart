@@ -8,6 +8,8 @@ import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/app_text.dart';
 import 'package:provider/provider.dart';
 
+import 'widgets/checkbox_dropdown.dart';
+
 class RestaurantDetailScreen extends StatelessWidget {
   const RestaurantDetailScreen({
     Key? key,
@@ -45,13 +47,36 @@ class RestaurantDetailScreen extends StatelessWidget {
                   hint: "Cities",
                   list: RestaurantProvider().cities,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text("Area"),
-                ),
-                DropDownWidget(
-                  hint: "Area",
-                  list: RestaurantProvider().cities,
+                Visibility(
+                  visible: context.watch<RestaurantProvider>().newValue != null,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Text("Area"),
+                      ),
+                      DropDownWidget(
+                        hint: "Area",
+                        list: RestaurantProvider().cities,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Text("Restaurant Name"),
+                      ),
+                      const TextformsWidget(),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Text("Enter Owner NUmber"),
+                      ),
+                      const TextformsWidget(),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Text("Preffered Languages"),
+                      ),
+                      CheckBoxDropDown(),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -67,9 +92,11 @@ class DropDownWidget extends StatelessWidget {
     Key? key,
     required this.hint,
     required this.list,
+    this.title,
   }) : super(key: key);
   final List list;
   final String hint;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +108,7 @@ class DropDownWidget extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                 border: Border.all(
                   color: AppStyle.kGrey,
-                  width: 2,
+                  width: 1,
                 )),
             width: AppStyle.size.width,
             child: DropdownButtonHideUnderline(
@@ -111,7 +138,7 @@ class DropDownWidget extends StatelessWidget {
                           ),
                         ))
                     .toList(),
-                value: value.newValue,
+                value: title ?? value.newValue,
                 onChanged: (value) {
                   context.read<RestaurantProvider>().selectValue(
                         value.toString(),
