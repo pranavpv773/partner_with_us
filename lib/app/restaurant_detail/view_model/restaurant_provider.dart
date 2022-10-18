@@ -7,6 +7,13 @@ class RestaurantProvider with ChangeNotifier {
   String? newCity;
   String? newArea;
   final TextEditingController textEditingController = TextEditingController();
+  final List<String> items = [
+    'English',
+    'Hindi',
+    'Telugu',
+    'Kannada',
+  ];
+  List<String> selectedItems = [];
   final List cities = [
     " Alipur",
     "Andaman Island",
