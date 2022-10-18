@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app_style/app_style.dart';
-import 'package:provider/provider.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     Key? key,
-    this.screen,
-    required this.index,
+    this.text,
+    this.index,
+    required this.fn,
   }) : super(key: key);
 
-  final dynamic screen;
-  final int index;
+  final String? text;
+  final int? index;
+
+  final VoidCallback fn;
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -24,16 +26,13 @@ class ButtonWidget extends StatelessWidget {
           ),
           height: 30.0,
           child: TextButton(
-            child: Center(
-              child: Text(
-                "Process",
-                style: TextStyle(fontSize: 15, color: AppStyle.kWhite),
-              ),
-            ),
-            onPressed: () {
-              context.read<FormProvider>().onTabIndexChange(index);
-            },
-          )),
+              onPressed: fn,
+              child: Center(
+                child: Text(
+                  text ?? "Process",
+                  style: TextStyle(fontSize: 15, color: AppStyle.kWhite),
+                ),
+              ))),
     );
   }
 }

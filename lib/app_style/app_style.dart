@@ -18,6 +18,9 @@ class AppStyle {
   /*---Colors------*/
 
   static final sizedBox10 = SizedBox(height: size.height / 15);
+
+  static String locationText =
+      "Before any personal information is collected and shared by the app with the necessary third parties, the collecting and sharing of information should be disclosed to the user and express consent must be obtained.";
   static String registerText =
       "Please provide a valid mobile number. This number will be a registered to send all important communications from Us.";
   static String fssaiText =
