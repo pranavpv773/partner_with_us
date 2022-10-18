@@ -7,16 +7,19 @@ class ContainerWidget extends StatelessWidget {
     required this.height,
     required this.child,
     required this.color,
+    this.radius,
   }) : super(key: key);
   final Widget child;
   final double width;
   final double height;
   final Color color;
-
+  final BorderRadius? radius;
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: color,
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: radius ?? const BorderRadius.all(Radius.circular(0))),
       width: width,
       height: height,
       child: child,
