@@ -4,8 +4,16 @@ import 'package:flutter/widgets.dart';
 
 class RestaurantProvider with ChangeNotifier {
   String? newValue;
+  String? newCity;
   String? newArea;
   final TextEditingController textEditingController = TextEditingController();
+  final List<String> items = [
+    'English',
+    'Hindi',
+    'Telugu',
+    'Kannada',
+  ];
+  List<String> selectedItems = [];
   final List cities = [
     " Alipur",
     "Andaman Island",
