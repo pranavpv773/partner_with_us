@@ -10,6 +10,8 @@ class AppStyle {
 
   /*---Colors------*/
   static Color primary = const Color(0xff34cc89);
-
+  static Color kWhite = Colors.white;
+  static Color kBlack = Colors.black;
+  static Color kGrey = Colors.grey;
   /*---Colors------*/
 }
