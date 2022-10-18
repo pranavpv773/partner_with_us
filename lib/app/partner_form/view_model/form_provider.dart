@@ -8,6 +8,7 @@ class FormProvider with ChangeNotifier {
   int pageIndex = 0;
   bool isFssai = false;
   bool isPan = false;
+  bool isBank = false;
 
   bool isLocation = false;
 
@@ -35,7 +36,6 @@ class FormProvider with ChangeNotifier {
     log(isLocation.toString());
 
     notifyListeners();
-    return isLocation;
   }
 
   onTabisPan(int number) {
@@ -45,6 +45,14 @@ class FormProvider with ChangeNotifier {
     log(isPan.toString());
 
     notifyListeners();
-    return isPan;
+  }
+
+  onTabisBank(int number) {
+    pageIndex = number;
+    isBank = true;
+
+    log(isBank.toString());
+
+    notifyListeners();
   }
 }

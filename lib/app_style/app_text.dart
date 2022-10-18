@@ -25,9 +25,12 @@ class AppTextStyles {
     fontSize: 12,
   );
 
-  static TextStyle h4 = const TextStyle(
-    fontSize: 25,
-    fontWeight: FontWeight.w500,
+  static TextStyle h4 = TextStyle(
+    wordSpacing: 2,
+    letterSpacing: 1,
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: AppStyle.kWhite,
   );
 
   static TextStyle h5 = TextStyle(
