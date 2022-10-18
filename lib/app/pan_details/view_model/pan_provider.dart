@@ -11,7 +11,7 @@ class PanProvider with ChangeNotifier {
 
   buttonFn(BuildContext context) {
     if (panFormKey.currentState!.validate()) {
-      context.read<FormProvider>().onTabisLocation(2);
+      context.read<FormProvider>().onTabisBank(4);
     }
   }
 }

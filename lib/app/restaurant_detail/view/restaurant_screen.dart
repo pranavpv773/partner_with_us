@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:partner_app/app/bank_details/bank_details.dart';
+import 'package:partner_app/app/bank_details/view/bank_details.dart';
 import 'package:partner_app/app/fssai/view/fssai_screen.dart';
 import 'package:partner_app/app/location_details/view/location.dart';
 import 'package:partner_app/app/pan_details/view/pan_details.dart';
