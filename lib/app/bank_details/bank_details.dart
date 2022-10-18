@@ -12,7 +12,6 @@ class BankDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController dateCtl = TextEditingController();
     return Consumer<FormProvider>(builder: (context, value, _) {
       return value.isBank
           ? Column(
