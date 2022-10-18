@@ -26,7 +26,7 @@ class DropDownWidget extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                 border: Border.all(
                   color: AppStyle.kGrey,
-                  width: 1,
+                  width: 2,
                 )),
             width: AppStyle.size.width,
             child: DropdownButtonHideUnderline(

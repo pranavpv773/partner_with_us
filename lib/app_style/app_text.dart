@@ -11,7 +11,7 @@ class AppTextStyles {
 
   static TextStyle h2 = TextStyle(
     letterSpacing: 1,
-    color: AppStyle.primary1,
+    color: AppStyle.kBlack,
     fontWeight: FontWeight.bold,
     fontSize: 16,
   );

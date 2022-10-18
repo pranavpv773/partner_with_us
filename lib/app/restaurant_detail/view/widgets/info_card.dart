@@ -5,8 +5,9 @@ import 'package:partner_app/app_style/app_style.dart';
 class InfoCard extends StatelessWidget {
   const InfoCard({
     Key? key,
+    required this.text,
   }) : super(key: key);
-
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +20,7 @@ class InfoCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Please provide a valid mobile number. This number will be a registered to send all important communications from Us.",
+            text,
             style: TextStyle(
               wordSpacing: 2,
               letterSpacing: 1,
