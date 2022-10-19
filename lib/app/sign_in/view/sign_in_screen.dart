@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
 import 'package:partner_app/app/sign_in/view_model/sign_in_provider.dart';
+import 'package:partner_app/app/signup/view/sign_up.dart';
 import 'package:partner_app/app/utilities/view/text_form_field.dart';
 import 'package:partner_app/app_style/app_images.dart';
 import 'package:partner_app/app_style/app_style.dart';
+import 'package:partner_app/app_style/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -41,22 +43,28 @@ class SignInScreen extends StatelessWidget {
                   iconData: Icons.remove_red_eye,
                 ),
                 const SignInButton(),
+                TextButton(
+                    onPressed: () {
+                      AppRoutes.nextScreen(screen: const SignUpScreen());
+                    },
+                    child: const Text("Sign Up")),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // context.watch()
-                      GestureDetector(
-                        onTap: () {
-                          log("message");
-                          context.read<SignInProvider>().googleLogIn();
-                        },
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: AssetImage(AppImages.google),
-                        ),
-                      ),
+                      context.watch<SignInProvider>().activityIndicator
+                          ? const CircularProgressIndicator()
+                          : GestureDetector(
+                              onTap: () {
+                                log("message");
+                                context.read<SignInProvider>().googleLogIn();
+                              },
+                              child: CircleAvatar(
+                                radius: 20,
+                                backgroundImage: AssetImage(AppImages.google),
+                              ),
+                            ),
                     ],
                   ),
                 )
