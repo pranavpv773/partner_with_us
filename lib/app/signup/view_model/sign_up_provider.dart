@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:partner_app/app/home/view/home_screen.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpProvider with ChangeNotifier {
   final userName = TextEditingController();
@@ -12,6 +13,7 @@ class SignUpProvider with ChangeNotifier {
   final FirebaseAuth firebase = FirebaseAuth.instance;
   bool signupIndicator = false;
   buttonFn(BuildContext context) async {
+    final shared = await SharedPreferences.getInstance();
     if (signUpFormKey.currentState!.validate()) {
       signupIndicator = true;
       notifyListeners();
@@ -30,6 +32,7 @@ class SignUpProvider with ChangeNotifier {
               .then(
             (value) {
               signupIndicator = false;
+              shared.setBool('login', true);
               disposeCntrller();
               notifyListeners();
               return AppRoutes.removeScreenUntil(
