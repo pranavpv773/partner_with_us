@@ -38,6 +38,10 @@ dependencies:
   google_fonts: ^3.0.1
   dropdown_button2: ^1.8.5
   animate_do: ^2.1.0
+  firebase_auth: ^3.6.2
+  firebase_core: ^1.20.0
+  google_sign_in: ^5.4.1
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:

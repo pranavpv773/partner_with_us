@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
 import 'package:partner_app/app/sign_in/view_model/sign_in_provider.dart';
@@ -8,8 +6,8 @@ import 'package:partner_app/app_style/app_images.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:provider/provider.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +43,20 @@ class SignInScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // context.watch()
-                      GestureDetector(
-                        onTap: () {
-                          log("message");
-                          context.read<SignInProvider>().googleLogIn();
-                        },
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: AssetImage(AppImages.google),
-                        ),
+                    children: const [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(
+                            "https://blog.hubspot.com/hubfs/image8-2.jpg"),
                       ),
+                      SizedBox(
+                        width: 50,
+                      ),
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/2048px-Facebook_f_logo_%282021%29.svg.png"),
+                      )
                     ],
                   ),
                 )

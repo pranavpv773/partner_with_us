@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/completed_screen/view/completed_screen.dart';
-import 'package:partner_app/app/partner_form/view_model/form_provider.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
-import 'package:provider/provider.dart';
 
 class BankProvider with ChangeNotifier {
   final code = TextEditingController();
