@@ -1,9 +1,10 @@
 # partner_app
 
 A new Flutter project.
-![WhatsApp Image 2022-10-19 at 16 42 11](https://user-images.githubusercontent.com/91565180/196676027-06ae7a85-7777-4e22-af4f-8a083789d6e2.jpeg)
 
 ## Getting Started
+
+![WhatsApp Image 2022-10-19 at 16 42 11](https://user-images.githubusercontent.com/91565180/196676027-06ae7a85-7777-4e22-af4f-8a083789d6e2.jpeg)
 
 This project is a starting point for a Flutter application.
 
