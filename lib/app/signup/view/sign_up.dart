@@ -60,22 +60,26 @@ class SignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        context.read<SignUpProvider>().buttonFn(context);
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(AppStyle.kBlack),
-        padding: MaterialStateProperty.all(
-            EdgeInsets.symmetric(horizontal: AppStyle.size.width / 3)),
-        textStyle: MaterialStateProperty.all(
-          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    return Consumer<SignUpProvider>(builder: (context, value, _) {
+      return ElevatedButton(
+        onPressed: () {
+          value.signupIndicator
+              ? () {}
+              : context.read<SignUpProvider>().buttonFn(context);
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(AppStyle.kBlack),
+          padding: MaterialStateProperty.all(
+              EdgeInsets.symmetric(horizontal: AppStyle.size.width / 3)),
+          textStyle: MaterialStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-      child: Text(
-        'Sign Up',
-        style: TextStyle(color: AppStyle.kWhite),
-      ),
-    );
+        child: Text(
+          value.signupIndicator ? "" : 'Sign Up',
+          style: TextStyle(color: AppStyle.kWhite),
+        ),
+      );
+    });
   }
 }
