@@ -6,8 +6,8 @@ import 'package:partner_app/app_style/app_images.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:provider/provider.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +43,16 @@ class SignInScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          context.read<SignInProvider>().googleLogIn();
-                        },
-                        child: const CircleAvatar(
-                          radius: 20,
-                          backgroundImage: NetworkImage(
-                              "https://blog.hubspot.com/hubfs/image8-2.jpg"),
-                        ),
+                    children: const [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(
+                            "https://blog.hubspot.com/hubfs/image8-2.jpg"),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 50,
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 20,
                         backgroundImage: NetworkImage(
                             "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/2048px-Facebook_f_logo_%282021%29.svg.png"),

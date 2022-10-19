@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/bank_details/view_model/bank_provider.dart';
 import 'package:partner_app/app/fssai/view_model/fssai_provider.dart';
@@ -12,7 +13,9 @@ import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
