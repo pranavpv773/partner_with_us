@@ -32,7 +32,7 @@ class TextformsWidget extends StatelessWidget {
         keyboardType: type ?? TextInputType.name,
         controller: controller,
         style: TextStyle(
-          color: AppStyle.kGrey,
+          color: AppStyle.kBlack,
           fontSize: 18,
         ),
         decoration: InputDecoration(
