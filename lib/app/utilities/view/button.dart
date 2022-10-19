@@ -6,11 +6,13 @@ class ButtonWidget extends StatelessWidget {
     Key? key,
     this.text,
     this.index,
+    this.colors,
     required this.fn,
   }) : super(key: key);
 
   final String? text;
   final int? index;
+  final Color? colors;
 
   final VoidCallback fn;
 
@@ -21,8 +23,8 @@ class ButtonWidget extends StatelessWidget {
       child: Container(
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2),
-            color: AppStyle.buttonColor,
+            borderRadius: BorderRadius.circular(5),
+            color: colors ?? AppStyle.buttonColor,
           ),
           height: 30.0,
           child: TextButton(
