@@ -12,6 +12,7 @@ class SignInProvider with ChangeNotifier {
   final signInFormKey = GlobalKey<FormState>();
   final FirebaseAuth firebase = FirebaseAuth.instance;
   bool activityIndicator = false;
+  bool isLoading = false;
   buttonFn(BuildContext context) async {
     if (signInFormKey.currentState!.validate()) {
       final shared = await SharedPreferences.getInstance();

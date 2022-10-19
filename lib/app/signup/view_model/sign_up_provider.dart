@@ -10,24 +10,37 @@ class SignUpProvider with ChangeNotifier {
   final conformpassword = TextEditingController();
   final signUpFormKey = GlobalKey<FormState>();
   final FirebaseAuth firebase = FirebaseAuth.instance;
-  bool activityIndicator = false;
+  bool signupIndicator = false;
   buttonFn(BuildContext context) async {
     if (signUpFormKey.currentState!.validate()) {
+      signupIndicator = true;
+      notifyListeners();
       if (password.text != conformpassword.text) {
         Fluttertoast.showToast(
           msg: "password not matching",
           toastLength: Toast.LENGTH_LONG,
         );
+        signupIndicator = false;
+        notifyListeners();
       } else {
         try {
           await firebase
               .createUserWithEmailAndPassword(
                   email: userName.text, password: password.text)
-              .then((value) => AppRoutes.removeScreenUntil(
-                      screen: const HomeScreen(
-                    type: LoginType.email,
-                  )));
+              .then(
+            (value) {
+              signupIndicator = true;
+              notifyListeners();
+              return AppRoutes.removeScreenUntil(
+                screen: const HomeScreen(
+                  type: LoginType.email,
+                ),
+              );
+            },
+          );
         } on FirebaseAuthException catch (e) {
+          signupIndicator = false;
+          notifyListeners();
           Fluttertoast.showToast(
             msg: e.message.toString(),
             toastLength: Toast.LENGTH_LONG,
