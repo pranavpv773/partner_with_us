@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
-import 'package:partner_app/app/sign_in/view_model/sign_in_provider.dart';
+import 'package:partner_app/app/signup/view_model/sign_up_provider.dart';
 import 'package:partner_app/app/utilities/view/text_form_field.dart';
 import 'package:partner_app/app_style/app_images.dart';
 import 'package:partner_app/app_style/app_style.dart';
@@ -19,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Form(
-            key: context.read<SignInProvider>().signInFormKey,
+            key: context.read<SignUpProvider>().signUpFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -30,36 +30,20 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 TextformsWidget(
                   hintText: "Username",
-                  controller: context.read<SignInProvider>().userName,
+                  controller: context.read<SignUpProvider>().userName,
                   iconData: Icons.person,
                 ),
                 TextformsWidget(
                   hintText: "Password",
-                  controller: context.read<SignInProvider>().password,
+                  controller: context.read<SignUpProvider>().password,
                   iconData: Icons.remove_red_eye,
                 ),
-                const SignInButton(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(
-                            "https://blog.hubspot.com/hubfs/image8-2.jpg"),
-                      ),
-                      SizedBox(
-                        width: 50,
-                      ),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(
-                            "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/2048px-Facebook_f_logo_%282021%29.svg.png"),
-                      )
-                    ],
-                  ),
-                )
+                TextformsWidget(
+                  hintText: "Confirm Password",
+                  controller: context.read<SignUpProvider>().conformpassword,
+                  iconData: Icons.remove_red_eye,
+                ),
+                const SignUpButton(),
               ],
             ),
           ),
@@ -69,8 +53,8 @@ class SignUpScreen extends StatelessWidget {
   }
 }
 
-class SignInButton extends StatelessWidget {
-  const SignInButton({
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({
     Key? key,
   }) : super(key: key);
 
@@ -78,7 +62,7 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        context.read<SignInProvider>().buttonFn(context);
+        context.read<SignUpProvider>().buttonFn(context);
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(AppStyle.kBlack),
@@ -89,7 +73,7 @@ class SignInButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        'Sign In',
+        'Sign Up',
         style: TextStyle(color: AppStyle.kWhite),
       ),
     );

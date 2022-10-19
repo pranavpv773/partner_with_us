@@ -21,7 +21,9 @@ class SignInProvider with ChangeNotifier {
             .then(
               (value) => {
                 AppRoutes.removeScreenUntil(
-                  screen: const HomeScreen(),
+                  screen: const HomeScreen(
+                    type: LoginType.email,
+                  ),
                 ),
               },
             );
@@ -37,12 +39,21 @@ class SignInProvider with ChangeNotifier {
     }
   }
 
+  Future<void> logOut(BuildContext context) async {
+    await firebase.signOut();
+  }
+
   void googleLogIn() async {
     try {
       activityIndicator = true;
       notifyListeners();
       final isLogged = await GoogleSignIn().isSignedIn();
-      if (isLogged) GoogleSignIn().signOut();
+      if (isLogged) {
+        GoogleSignIn().signOut().then((value) {
+          return activityIndicator = true;
+        });
+        notifyListeners();
+      }
       final result = await GoogleSignIn().signIn();
       if (result == null) {
         activityIndicator = false;
@@ -58,7 +69,10 @@ class SignInProvider with ChangeNotifier {
               accessToken: cred.accessToken, idToken: cred.idToken))
           .then((value) {
         activityIndicator = false;
-        return AppRoutes.removeScreenUntil(screen: const HomeScreen());
+        return AppRoutes.removeScreenUntil(
+            screen: const HomeScreen(
+          type: LoginType.google,
+        ));
       });
 
       notifyListeners();

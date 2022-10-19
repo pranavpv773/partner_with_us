@@ -3,14 +3,18 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:partner_app/app/partner_form/view/form_screen.dart';
 import 'package:partner_app/app/partner_form/view/widgets/container_widget.dart';
 import 'package:partner_app/app/sign_in/view/sign_in_screen.dart';
+import 'package:partner_app/app/sign_in/view_model/sign_in_provider.dart';
 import 'package:partner_app/app/utilities/view/button.dart';
 import 'package:partner_app/app_style/app_images.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
+import 'package:provider/provider.dart';
+
+enum LoginType { google, email }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+  const HomeScreen({Key? key, this.type}) : super(key: key);
+  final LoginType? type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +24,19 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                GoogleSignIn().signOut().then(
-                      (value) => AppRoutes.removeScreenUntil(
-                        screen: const SignInScreen(),
-                      ),
-                    );
+                if (type == LoginType.google) {
+                  GoogleSignIn().signOut().then(
+                        (value) => AppRoutes.removeScreenUntil(
+                          screen: const SignInScreen(),
+                        ),
+                      );
+                } else {
+                  context.read<SignInProvider>().logOut(context).then(
+                        (value) => AppRoutes.removeScreenUntil(
+                          screen: const SignInScreen(),
+                        ),
+                      );
+                }
               },
               icon: const Icon(
                 Icons.logout_outlined,
