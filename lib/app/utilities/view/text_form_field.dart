@@ -32,6 +32,7 @@ class TextformsWidget extends StatelessWidget {
           contentPadding: const EdgeInsets.all(0),
           fillColor: AppStyle.kWhite,
           filled: true,
+          prefixIcon: const Icon(Icons.food_bank_rounded),
           suffixIcon: suffix ?? const SizedBox(),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(

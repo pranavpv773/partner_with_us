@@ -61,93 +61,91 @@ class FirstSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log("first");
-    return Consumer<RestaurantProvider>(builder: (context, value, _) {
-      return Form(
-        key: value.formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Restaurant Details",
-                style: AppTextStyles.h2,
-              ),
+    return Form(
+      key: context.read<RestaurantProvider>().formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Restaurant Details",
+              style: AppTextStyles.h2,
             ),
-            InfoCard(
-              text: AppStyle.registerText,
+          ),
+          InfoCard(
+            text: AppStyle.registerText,
+          ),
+          AppStyle.sizedBox10,
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text("City"),
+          ),
+          DropDownWidget(
+            hint: "Cities",
+            list: RestaurantProvider().cities,
+          ),
+          Visibility(
+            visible: context.watch<RestaurantProvider>().newValue != null,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Text("Area"),
+                ),
+                DropDownWidget(
+                  hint: "Area",
+                  list: RestaurantProvider().cities,
+                ),
+              ],
             ),
-            AppStyle.sizedBox10,
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text("City"),
-            ),
-            DropDownWidget(
-              hint: "Cities",
-              list: RestaurantProvider().cities,
-            ),
-            Visibility(
-              visible: context.watch<RestaurantProvider>().newValue != null,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: Text("Area"),
-                  ),
-                  DropDownWidget(
-                    hint: "Area",
-                    list: RestaurantProvider().cities,
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text("Restaurant Name"),
-            ),
-            TextformsWidget(
-              controller: RestaurantProvider().resName,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text("Enter Owner Number"),
-            ),
-            TextformsWidget(
-              controller: RestaurantProvider().phoneNumber,
-              type: TextInputType.number,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text("Preffered Languages"),
-            ),
-            const CheckBoxDropDown(),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text("Owner Name"),
-            ),
-            TextformsWidget(controller: RestaurantProvider().ownerName),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text("Whatsapp Owner Number"),
-            ),
-            TextformsWidget(
-              controller: RestaurantProvider().whatsappnumber,
-              type: TextInputType.number,
-            ),
-            context.watch<FormProvider>().isFssai
-                ? Divider(
-                    color: AppStyle.buttonColor,
-                  )
-                : ButtonWidget(
-                    fn: () {
-                      value.buttonFn(context);
-                    },
-                  ),
-          ],
-        ),
-      );
-    });
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text("Restaurant Name"),
+          ),
+          TextformsWidget(
+            controller: RestaurantProvider().resName,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text("Enter Owner Number"),
+          ),
+          TextformsWidget(
+            controller: RestaurantProvider().phoneNumber,
+            type: TextInputType.number,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text("Preffered Languages"),
+          ),
+          const CheckBoxDropDown(),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text("Owner Name"),
+          ),
+          TextformsWidget(controller: RestaurantProvider().ownerName),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text("Whatsapp Owner Number"),
+          ),
+          TextformsWidget(
+            controller: RestaurantProvider().whatsappnumber,
+            type: TextInputType.number,
+          ),
+          context.watch<FormProvider>().isFssai
+              ? Divider(
+                  color: AppStyle.buttonColor,
+                )
+              : ButtonWidget(
+                  fn: () {
+                    context.read<RestaurantProvider>().buttonFn(context);
+                  },
+                ),
+        ],
+      ),
+    );
   }
 }
 
