@@ -10,6 +10,7 @@ class SignInProvider with ChangeNotifier {
   final password = TextEditingController();
   final signInFormKey = GlobalKey<FormState>();
   final FirebaseAuth firebase = FirebaseAuth.instance;
+  bool activityIndicator = false;
   buttonFn(BuildContext context) async {
     if (signInFormKey.currentState!.validate()) {
       try {
@@ -38,14 +39,16 @@ class SignInProvider with ChangeNotifier {
 
   void googleLogIn() async {
     try {
+      activityIndicator = true;
       notifyListeners();
       final isLogged = await GoogleSignIn().isSignedIn();
       if (isLogged) GoogleSignIn().signOut();
       final result = await GoogleSignIn().signIn();
       if (result == null) {
+        activityIndicator = false;
         notifyListeners();
         Fluttertoast.showToast(
-          msg: " e.message.toString()",
+          msg: "somme error",
           toastLength: Toast.LENGTH_LONG,
         );
       }
@@ -53,8 +56,10 @@ class SignInProvider with ChangeNotifier {
       await firebase
           .signInWithCredential(GoogleAuthProvider.credential(
               accessToken: cred.accessToken, idToken: cred.idToken))
-          .then((value) =>
-              AppRoutes.removeScreenUntil(screen: const HomeScreen()));
+          .then((value) {
+        activityIndicator = false;
+        return AppRoutes.removeScreenUntil(screen: const HomeScreen());
+      });
 
       notifyListeners();
       Fluttertoast.showToast(
@@ -62,6 +67,8 @@ class SignInProvider with ChangeNotifier {
         toastLength: Toast.LENGTH_LONG,
       );
     } on FirebaseAuthException catch (exe) {
+      activityIndicator = false;
+
       Fluttertoast.showToast(
         msg: exe.message.toString(),
         toastLength: Toast.LENGTH_LONG,

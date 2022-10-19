@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:partner_app/app/pan_details/view_model/pan_provider.dart';
@@ -9,6 +9,7 @@ import 'package:partner_app/app/utilities/view/text_form_field.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/app_text.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class PanDetail extends StatelessWidget {
   const PanDetail({Key? key}) : super(key: key);
@@ -54,15 +55,17 @@ class PanDetail extends StatelessWidget {
                     controller: context.read<PanProvider>().dob,
                     suffix: const Icon(Icons.date_range_outlined),
                     function: () async {
-                      DateTime date = DateTime(1900);
+                      DateTime date = DateTime.now();
                       FocusScope.of(context).requestFocus(FocusNode());
 
-                      date = (await showDatePicker(
+                      DateTime dates = (await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
+                          firstDate: DateTime(1950),
                           lastDate: DateTime(2100)))!;
-                      context.read<PanProvider>().dob.text = date.toString();
+                      String now = DateFormat('dd-MM-yyyy').format(dates);
+
+                      context.read<PanProvider>().dob.text = now;
                     },
                   ),
                   const Padding(
