@@ -9,6 +9,7 @@ import 'package:partner_app/app_style/app_images.dart';
 import 'package:partner_app/app_style/app_style.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum LoginType { google, email }
 
@@ -23,13 +24,18 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Welcome"),
         actions: [
           IconButton(
-              onPressed: () {
+              onPressed: () async {
                 if (type == LoginType.google) {
+                  final shared = await SharedPreferences.getInstance();
+
                   GoogleSignIn().signOut().then(
-                        (value) => AppRoutes.removeScreenUntil(
-                          screen: const SignInScreen(),
-                        ),
+                    (value) {
+                      shared.setBool('login', false);
+                      return AppRoutes.removeScreenUntil(
+                        screen: const SignInScreen(),
                       );
+                    },
+                  );
                 } else {
                   context.read<SignInProvider>().logOut(context).then(
                         (value) => AppRoutes.removeScreenUntil(

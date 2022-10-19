@@ -4,6 +4,7 @@ import 'package:partner_app/app/home/view/home_screen.dart';
 import 'package:partner_app/app_style/routes/app_routes.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInProvider with ChangeNotifier {
   final userName = TextEditingController();
@@ -13,6 +14,7 @@ class SignInProvider with ChangeNotifier {
   bool activityIndicator = false;
   buttonFn(BuildContext context) async {
     if (signInFormKey.currentState!.validate()) {
+      final shared = await SharedPreferences.getInstance();
       try {
         FirebaseAuth auth = FirebaseAuth.instance;
         await auth
@@ -20,6 +22,7 @@ class SignInProvider with ChangeNotifier {
                 email: userName.text, password: password.text)
             .then(
               (value) => {
+                shared.setBool('login', true),
                 AppRoutes.removeScreenUntil(
                   screen: const HomeScreen(
                     type: LoginType.email,
@@ -40,10 +43,15 @@ class SignInProvider with ChangeNotifier {
   }
 
   Future<void> logOut(BuildContext context) async {
-    await firebase.signOut();
+    final shared = await SharedPreferences.getInstance();
+    await firebase.signOut().then(
+          (value) => shared.setBool('login', false),
+        );
   }
 
   void googleLogIn() async {
+    final shared = await SharedPreferences.getInstance();
+
     try {
       activityIndicator = true;
       notifyListeners();
@@ -57,6 +65,7 @@ class SignInProvider with ChangeNotifier {
       final result = await GoogleSignIn().signIn();
       if (result == null) {
         activityIndicator = false;
+        shared.setBool('login', false);
         notifyListeners();
         Fluttertoast.showToast(
           msg: "somme error",
@@ -68,6 +77,7 @@ class SignInProvider with ChangeNotifier {
           .signInWithCredential(GoogleAuthProvider.credential(
               accessToken: cred.accessToken, idToken: cred.idToken))
           .then((value) {
+        shared.setBool('login', true);
         activityIndicator = false;
         return AppRoutes.removeScreenUntil(
             screen: const HomeScreen(

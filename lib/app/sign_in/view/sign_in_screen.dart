@@ -44,10 +44,15 @@ class SignInScreen extends StatelessWidget {
                 ),
                 const SignInButton(),
                 TextButton(
-                    onPressed: () {
-                      AppRoutes.nextScreen(screen: const SignUpScreen());
-                    },
-                    child: const Text("Sign Up")),
+                  onPressed: () {
+                    AppRoutes.nextScreen(
+                      screen: const SignUpScreen(),
+                    );
+                  },
+                  child: const Text(
+                    "Sign Up",
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
