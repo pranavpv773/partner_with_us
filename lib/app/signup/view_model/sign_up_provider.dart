@@ -29,7 +29,8 @@ class SignUpProvider with ChangeNotifier {
                   email: userName.text, password: password.text)
               .then(
             (value) {
-              signupIndicator = true;
+              signupIndicator = false;
+              disposeCntrller();
               notifyListeners();
               return AppRoutes.removeScreenUntil(
                 screen: const HomeScreen(
@@ -48,5 +49,11 @@ class SignUpProvider with ChangeNotifier {
         }
       }
     }
+  }
+
+  void disposeCntrller() {
+    userName.clear();
+    password.clear();
+    conformpassword.clear();
   }
 }
