@@ -83,7 +83,7 @@ class FirstSection extends StatelessWidget {
           ),
           DropDownWidget(
             hint: "Cities",
-            list: RestaurantProvider().cities,
+            list: context.read<RestaurantProvider>().cities,
           ),
           Visibility(
             visible: context.watch<RestaurantProvider>().newValue != null,
@@ -96,7 +96,7 @@ class FirstSection extends StatelessWidget {
                 ),
                 DropDownWidget(
                   hint: "Area",
-                  list: RestaurantProvider().cities,
+                  list: context.read<RestaurantProvider>().cities,
                 ),
               ],
             ),
@@ -106,14 +106,14 @@ class FirstSection extends StatelessWidget {
             child: Text("Restaurant Name"),
           ),
           TextformsWidget(
-            controller: RestaurantProvider().resName,
+            controller: context.read<RestaurantProvider>().resName,
           ),
           const Padding(
             padding: EdgeInsets.only(left: 10.0),
             child: Text("Enter Owner Number"),
           ),
           TextformsWidget(
-            controller: RestaurantProvider().phoneNumber,
+            controller: context.read<RestaurantProvider>().phoneNumber,
             type: TextInputType.number,
           ),
           const Padding(
@@ -125,13 +125,14 @@ class FirstSection extends StatelessWidget {
             padding: EdgeInsets.only(left: 10.0),
             child: Text("Owner Name"),
           ),
-          TextformsWidget(controller: RestaurantProvider().ownerName),
+          TextformsWidget(
+              controller: context.read<RestaurantProvider>().ownerName),
           const Padding(
             padding: EdgeInsets.only(left: 10.0),
             child: Text("Whatsapp Owner Number"),
           ),
           TextformsWidget(
-            controller: RestaurantProvider().whatsappnumber,
+            controller: context.read<RestaurantProvider>().whatsappnumber,
             type: TextInputType.number,
           ),
           context.watch<FormProvider>().isFssai
